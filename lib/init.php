@@ -14,8 +14,6 @@ require_once GENEX_LIB.DS.'log.php';
 
 Log::setup();
 
-Log::warning("Hi!");
-
 spl_autoload_register(function($class_name) {
 	$_class = strtolower($class_name);
 	$_class = str_replace(NS, DS, $_class);

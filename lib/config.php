@@ -1,20 +1,23 @@
 <?php
-namespace Genex\File;
+namespace Genex;
 
-class M4 {
+class Config {
 	public $name;
 	public $includes = array();
 	public $sources = array();
 
 	public function __construct($name) {
 		$this->name = $name;
+		$low = strtolower($this->name);
+		$this->sources[] = "php_$low.h";
+		$this->sources[] = "php_$low.c";
 	}
 
 	public function addInclude($path) {
 		$this->includes[] = $path;
 	}
 
-	public function addSrc($filename) {
+	public function addCSrc($filename) {
 		$this->sources[] = $filename;
 	}
 
