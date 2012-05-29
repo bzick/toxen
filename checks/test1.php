@@ -1,5 +1,13 @@
 <?php
+trait Def {
+	public function __toString() {
+		return "Stub";
+	}
+}
+
 class Back extends ArrayObject implements Countable {
+	use Def;
+	const FOO = 1;
 	public $encode = 55;
 	public $back_foo = "button";
 	protected $back_bar = 42;
@@ -36,9 +44,12 @@ class Adv extends Back implements Serializable, Traversable {
 	protected function listing() {
 		return $this->adv_baz;
 	}
+
+	public function __toString() {
+		return "custom";
+	}
 }
 
 
-$adv = new  ReflectionClass("Adv");
-var_dump(class_parents("Adv"));
+$adv = new ReflectionClass("Adv");
 ?>

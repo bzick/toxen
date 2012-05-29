@@ -2,13 +2,15 @@
 namespace Genex\Element;
 
 class Cls extends \ReflectionClass {
+	use \Genex\Stubs;
 
 	public $namespace;
 	public $constants = array();
 	public $props = array();
 	public $methods = array();
-	public $extends;
+	public $parent;
 	public $interfaces = array();
+	public $traits = array();
 
 	public function __construct($class_name) {
 		parent::__construct($class_name);
@@ -28,10 +30,17 @@ class Cls extends \ReflectionClass {
 			}
 		}
 		$this->interfaces = $this->getInterfaceNames();
-		$extends = class_parents($this->name);
-		if($extends) {
-			$this->extends = $extends[0];
+		$parents = class_parents($this->name);
+		if($parents) {
+			$this->parent = $parents[0];
 		}
-		//$this->props[] = new
+	}
+
+	public function __toString() {
+		return $this->name;
+	}
+
+	public function getSourceConstants() {
+		
 	}
 }
