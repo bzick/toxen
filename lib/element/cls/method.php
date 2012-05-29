@@ -3,6 +3,7 @@ namespace Genex\Element\Cls;
 
 class Method extends \ReflectionMethod {
 	use \Genex\FunctionParser;
+	use \Genex\Element\Callable;
 
 	public $class;
 	public $name;
@@ -18,14 +19,14 @@ class Method extends \ReflectionMethod {
 		parent::__construct($class->name, $method);
 		$this->class = $class;
 		foreach($this->getParams() as $param) {
-			$this->args[] = $arg = new Method\Arg($method, $param->name);
+			$this->args[] = $arg = new \Genex\Element\Method\Argument($this, $param->name);
 			$this->vars[] = $arg->getVar();
 		}
 		$this->tokenizer = new \Genex\Tokenizer($this);
 	}
 
 	public function __toString() {
-		return $class->name."::".$this->name;
+		return $this->class->name."::".$this->name."()";
 	}
 
 	public function getArgInfo() {

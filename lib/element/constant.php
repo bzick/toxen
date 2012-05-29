@@ -3,7 +3,7 @@ namespace Genex\Element;
 use Genex\State;
 
 class Constant {
-	use Genex\Stubs;
+	use \Genex\Stubs;
 
 	const TYPE_LONG = 1;
 	const TYPE_FLOAT = 2;
@@ -14,7 +14,7 @@ class Constant {
 	public $value;
 	public $type;
 
-	function __construct($name, $value) {
+	function __construct(\Genex\Extension $extension, $name, $value) {
 		$this->name = $name;
 		$this->value = $value;
 		switch(true) {

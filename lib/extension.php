@@ -18,16 +18,16 @@ class Extension {
 		if(!class_exists($class_name, true)) {
 			throw new \Exception("Class $class_name not found");
 		}
-		$this->classes[] = $class = new ElementClass($class_name);
+		$this->classes[] = $class = new Element\Cls($this, $class_name);
 		$this->config->addClassSrc( $class );
 	}
 
 	public function addConst($const_name, $value) {
-		$this->consts[] = new ElementConst($const_name, $value);
+		$this->consts[] = new Element\Constant($this, $const_name, $value);
 	}
 
 	public function addFunc($function_name) {
-		$this->funcs[] = new ElementFunction($function_name);
+		$this->funcs[] = new Element\Func($this, $function_name);
 	}
 
 	public function setDepends(array $extensions) {
