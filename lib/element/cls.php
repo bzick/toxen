@@ -1,9 +1,11 @@
 <?php
 namespace Genex\Element;
+use Genex\Log;
 
 class Cls extends \ReflectionClass {
 	use \Genex\Stubs;
 
+	public $code;
 	public $namespace;
 	public $constants = array();
 	public $props = array();
@@ -14,7 +16,7 @@ class Cls extends \ReflectionClass {
 
 	public function __construct($class_name) {
 		parent::__construct($class_name);
-
+		Log::debug("Class $this created");
 		$this->namespace = $this->getNamespaceName();
 		foreach($this->getConstants() as $const => $value) {
 			$this->constants[] = new Cls\Constant($this, $const, $value);

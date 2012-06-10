@@ -2,9 +2,19 @@
 namespace Genex;
 
 class Tokenizer {
-	public function __construct(\ReflectionMethod $method) {
-		$file = $method->getFileName();
-		$start = $method->getStartLine();
-		$end =  $method->getEndLine();
+	use Stubs;
+
+	public $func;
+
+	public function __construct(\ReflectionFunctionAbstract $func) {
+		$this->func = $func;
+		$file = $func->getFileName();
+		$start = $func->getStartLine();
+		$end =  $func->getEndLine();
+		Log::debug("$this created");
+	}
+
+	public function __toString() {
+		return "Tokenizer[$this->func]";
 	}
 }

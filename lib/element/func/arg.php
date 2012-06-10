@@ -1,5 +1,6 @@
 <?php
 namespace Genex\Element\Func;
+use Genex\Log;
 
 class Arg extends \ReflectionParameter {
 	const TYPE_MIXED = 0;
@@ -8,10 +9,12 @@ class Arg extends \ReflectionParameter {
 	public $position;
 	public $optional = false;
 	public $variable;
+	public $char = "z";
 
-	public function __construct(Genex\Element\Callable $callable, $name) {
-		$this->callable = $callable;
-		parent::__construct($callable->name, $name);
+	public function __construct($func, $name) {
+		$this->callable = $func;
+		parent::__construct($func->name, $name);
+		Log::debug("Argument $this created");
 		$this->variable = new \Genex\Element\Variable();
 	}
 

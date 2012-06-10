@@ -23,6 +23,9 @@ class Log {
 
 
 	public static function setup() {
+		ini_set('display_errors', true);
+		error_reporting(-1);
+
 		register_shutdown_function(function () {
 			$error = error_get_last();
 			if ($error && ($error['type'] & (E_ERROR | E_PARSE | E_COMPILE_ERROR))) {
@@ -37,12 +40,13 @@ class Log {
 			}
 		});
 
+
 		set_exception_handler(function ($e) {
 			self::error($e);
 		});
 
 		set_error_handler(function ($errno, $errstr, $errfile, $errline) {
-			$str = 'PHP: '.$errstr.' in '.$errfile.':'.$errline;
+			$str = $errstr.' in '.$errfile.':'.$errline;
 			switch ($errno) {
 				case E_NOTICE:
 				case E_STRICT:
@@ -69,7 +73,7 @@ class Log {
 	public static function error($msg) {
 		if($msg instanceof \Exception) {
 			/* @var \Exception $msg */
-			self::_print(self::E_ERROR, $msg->getMessage()." in ".$msg->getLine().":".$msg->getLine());
+			self::_print(self::E_ERROR, $msg->getMessage()." in ".$msg->getFile().":".$msg->getLine().\n.$msg->getTraceAsString());
 		} else {
 			self::_print(self::E_ERROR, $msg);
 		}

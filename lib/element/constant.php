@@ -1,6 +1,7 @@
 <?php
 namespace Genex\Element;
 use Genex\State;
+use Genex\Log;
 
 class Constant {
 	use \Genex\Stubs;
@@ -13,10 +14,14 @@ class Constant {
 	public $name;
 	public $value;
 	public $type;
+	public $namespace;
 
-	function __construct(\Genex\Extension $extension, $name, $value) {
+	function __construct($name, $value) {
 		$this->name = $name;
 		$this->value = $value;
+		if(strrpos($name, NS)) {
+			$this->namespace = strrchr();
+		}
 		switch(true) {
 			case is_int($value):
 				$this->type = self::TYPE_LONG;
@@ -33,6 +38,7 @@ class Constant {
 			default:
 				throw State::badArgs("Constant $this must be integer, float, string or boolean (%s given)", gettype($value));
 		}
+		Log::debug("Constant $this created");
 	}
 
 	public function __toString() {

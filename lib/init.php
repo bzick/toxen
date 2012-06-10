@@ -2,6 +2,7 @@
 use Genex\Log;
 
 define('n', "\n"); // $var.\n;
+define('r', "\r"); // $var.\r;
 define('r\n', "\r\n"); // $var.\r\n;
 define('t', "\t"); // $var.\t;
 define('n\t', "\n\t"); // $var.\n\t;
@@ -17,11 +18,22 @@ Log::setup();
 spl_autoload_register(function($class_name) {
 	$_class = strtolower($class_name);
 	$_class = str_replace(NS, DS, $_class);
-	$file = GENEX_LIB.DS.rtrim($_class).".php";
-	if(file_exists($file)) {
-		require_once $file;
+	$_class = ltrim($_class, DS);
+	$first = strstr($_class, "/", true);
+	if($first == "genex") {
+		$file = GENEX_LIB.strstr($_class, "/").".php";
+		if(file_exists($file)) {
+			require_once $file;
+		}
 	}
 });
+
+/**
+ * Alias of sprintf
+ */
+function f($format) {
+	return call_user_func_array("sprintf", func_get_args());
+}
 
 /**
  * Аналогично var_dump($data); exit; за исключением того, что перед выводом пишет где была вызвана

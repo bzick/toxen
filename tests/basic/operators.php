@@ -1,7 +1,7 @@
 <?php
 namespace Tests\Basic;
 
-class Operators {
+class Operators implements \Countable {
 	const INT_CONST = 17;
 	const STRING_CONST = "str";
 	const FLOAT_CONST = 1.1;
@@ -32,4 +32,10 @@ class Operators {
 	public function div($a, $b) {
 		return $a / $b;
 	}
+
+	public function count()	{
+		return self::$prop3;
+	}
+
+
 }
