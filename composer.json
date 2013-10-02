@@ -1,0 +1,23 @@
+{
+    "name": "toxen/toxen",
+    "description": "PHP to Zend Engine converter",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ivan Shalganov",
+            "email": "a.cobest@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-0": { "Toxen": "src/" }
+    },
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.4",
+        "nikic/php-parser": "*",
+        "symfony/finder": "~2.2"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "3.7.*"
+    }
+}
