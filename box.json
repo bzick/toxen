@@ -1,0 +1,12 @@
+{
+	"banner": "PHP to Zend Engine converter, Ivan Shalganov (a.cobest@gmail.com)",
+	"alias": "toxen.phar",
+	"chmod": "0755",
+	"compression": "GZ",
+	"directories": ["src", "lib", "sandbox"],
+	"git-version": "git_tag",
+	"output": "toxen-@git_tag@.phar",
+	"main": "bin/toxen",
+	"stub": true,
+	"web": false
+}
